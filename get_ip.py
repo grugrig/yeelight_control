@@ -10,6 +10,9 @@ from PyQt5.QtWidgets import (
     QLineEdit
 )
 
+from lamps_operate import MyWindow
+
+
 class GetIp(QDialog):
     def __init__(self):
         super().__init__()
@@ -60,12 +63,12 @@ class GetIp(QDialog):
                         self, 'Message', 'Вы ничего не ввели!')
             return
         
-        # window = MyWindow(addresses)
-        # window.setWindowTitle("Управление лампами")
-        # self.close()
-        # window.exec_()
+        window = MyWindow(addresses)
+        window.setWindowTitle("Управление лампами")
+        self.close()
+        window.exec_()
 
-        print(addresses)
+        # print(addresses)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
