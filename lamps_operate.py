@@ -3,6 +3,7 @@ import ipaddress
 import random
 
 from PyQt5 import QtCore, QtWidgets
+from yeelight import Bulb, BulbException
 
 
 lst = ["192.168.0.1", "192.168.0.2", "192.168.0.3", "192.168.0.4"]
@@ -42,10 +43,23 @@ class MyWindow(QtWidgets.QDialog):
         self.setGeometry(400, 200, 325, 150)
 
     def on_btnOn_clicked(self):
-        pass
+        ip = self.radBtn_group.checkedButton().text()
+        try:
+            bulb = Bulb(ip)
+            bulb.turn_on()
+        except BulbException as e:
+            QtWidgets.QMessageBox.information(
+                self, 'Message', f"Ошибка управления лампой: {e}")
+            
 
     def on_btnOff_clicked(self):
-        pass
+        ip = self.radBtn_group.checkedButton().text()
+        try:
+            bulb = Bulb(ip)
+            bulb.turn_off()
+        except BulbException as e:
+            QtWidgets.QMessageBox.information(
+                self, 'Message', f"Ошибка управления лампой: {e}")
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
